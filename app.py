@@ -3,6 +3,9 @@ import joblib
 import pandas as pd
 import requests
 
+# Load model
+model = joblib.load("salary_model.joblib")
+
 st.title("Salary Prediction App", text_alignment="center")
 job_titles = ['AI Engineer','Data Analyst','Frontend Developer', 'Business Analyst','Product Manager','Backend Developer','Machine Learning Engineer','DevOps Engineer','Software Engineer','Cybersecurity Analyst','Data Scientist','Cloud Engineer']
 locations=['India','Australia','Singapore','Canada','Sweden','USA','Netherlands','Remote','Germany','UK']
@@ -32,7 +35,7 @@ certifications = st.slider("Certifications", 0, 10, key="certifications")
 
 
 if st.button("Predict"):
-    payload = {
+    input_df = pd.DataFrame([{
         "job_title": job_title,
         "experience_years": experience,
         "education_level": education,
@@ -42,12 +45,9 @@ if st.button("Predict"):
         "location": location,
         "remote_work": remote,
         "certifications": certifications
-    }
-
-    response = requests.post("http://127.0.0.1:8000/predict", json=payload)
+    }])
     
-    result = response.json()
-    st.success(f"Predicted Salary: ${result['predicted_salary']:,.2f}")
-
+    predicted_salary = model.predict(input_df)[0]
+    st.success(f"Predicted Salary: ${predicted_salary:,.2f}")
 
 st.button("Clear All Options", on_click=reset_form)

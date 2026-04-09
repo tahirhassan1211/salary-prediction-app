@@ -1,0 +1,21 @@
+# if you run through api update the app.py code 
+
+"""
+if st.button("Predict"):
+    payload = {
+        "job_title": job_title,
+        "experience_years": experience,
+        "education_level": education,
+        "skills_count": skills,
+        "industry": industry,
+        "company_size": company_size,
+        "location": location,
+        "remote_work": remote,
+        "certifications": certifications
+    }
+
+    response = requests.post("http://127.0.0.1:8000/predict", json=payload)
+    
+    result = response.json()
+    st.success(f"Predicted Salary: ${result['predicted_salary']:,.2f}")
+"""
