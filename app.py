@@ -3,6 +3,7 @@ import joblib
 import pandas as pd
 import requests
 
+
 # Load model
 model = joblib.load("salary_model.joblib")
 
